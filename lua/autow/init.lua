@@ -38,7 +38,7 @@ function M.enable_autosave()
     end
 
     M.autocmd_group = vim.api.nvim_create_augroup("AutowAutosave", { clear = true })
-    vim.api.nvim_create_autocmd("VimLeaveI", {
+    vim.api.nvim_create_autocmd("InsertLeave", {
         group = M.autocmd_group,
         callback = function()
             if M.should_autosave() then
