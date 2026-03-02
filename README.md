@@ -1,64 +1,66 @@
-# autow.nvim (auto + `:w` command)
-nvim向けプラグイン: ファイルの自動保存
+# 💾 autow.nvim
 
-## 機能
-- 入力モードを抜けたタイミングで開いているファイルの自動保存
-- 対象とするファイルタイプを指定可能
-- 特定ファイル名では自動保存しない設定が可能
-- ON/OFFのトグル機能
+**A lightweight, no-nonsense autosave plugin for Neovim.**
 
-## 特徴
-- 100％Lua実装
-- 軽量
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![Neovim](https://img.shields.io/badge/Neovim-0.8+-blue.svg)](https://neovim.io/)
 
----
+Stop worrying about `:w` every two seconds. `autow.nvim` automatically saves your changes whenever you leave Insert mode, so you can focus on what actually matters—writing code.
 
-## 使い方
+## ✨ Features
 
-### 1. インストール
+- 🚀 **Blazing Fast**: Written 100% in Lua. Zero overhead.
+- 🛠️ **Configurable**: Filter by filetypes or exclude specific filenames.
+- 🔄 **Toggleable**: Need to disable it temporarily? Just run `:AutowToggle`.
+- 🧩 **Smart**: Won't try to save read-only or scratch buffers.
 
-お好みのプラグインマネージャーを使用して `autow.nvim` をインストールします。
+## 📦 Installation
 
-**packer.nvim の場合:**
+Use your favorite plugin manager.
+
+### [lazy.nvim](https://github.com/folke/lazy.nvim)
 
 ```lua
-use 'uhsog/autow.nvim'
+{
+  'uhsog/autow.nvim',
+  config = function()
+    require('autow').setup({
+      -- your config here (optional)
+    })
+  end
+}
 ```
 
-**lazy.nvim の場合:**
+### [packer.nvim](https://github.com/wbthomason/packer.nvim)
 
 ```lua
-{ 'uhsog/autow.nvim',
+use {
+  'uhsog/autow.nvim',
   config = function()
     require('autow').setup()
   end
-},
+}
 ```
 
-### 2. 設定 (init.lua または init.vim)
+## ⚙️ Configuration
 
-Neovimの設定ファイル（通常 `~/.config/nvim/init.lua` または `~/.config/nvim/init.vim`）に、`require('autow').setup()` を追加してプラグインを有効にします。
-
-**例 (init.lua):**
+`autow.nvim` works great out of the box, but you can tweak it to your liking:
 
 ```lua
--- デフォルト設定で有効化
-require('autow').setup()
-
--- カスタム設定の例
--- require('autow').setup({
---     enabled = true, -- 初期状態で有効にするか (デフォルト: true)
---     filetypes = { "lua", "python", "javascript" }, -- これらのファイルタイプのみ自動保存 (空のテーブルは全てを対象)
---     exclude_filenames = { "COMMIT_EDITMSG", "*.git/COMMIT_EDITMSG", "**/tmp/*" }, -- これらのファイル名を除外
--- })
+require('autow').setup({
+  enabled = true,                        -- Enable on startup (default: true)
+  filetypes = { "lua", "python" },      -- Only autosave these filetypes (default: {} for all)
+  exclude_filenames = { "secrets.txt" }, -- Skip these files (default: {})
+})
 ```
 
-### 3. 使用方法
+## 🎮 Commands
 
-*   Neovimを開き、ファイルを編集します。
-*   Insertモードを終了する（例: `Esc`キーを押してNormalモードに戻る）と、変更が自動的に保存されます。
+- `:AutowToggle` - Toggle the autosave functionality ON/OFF.
 
-### 4. ON/OFFの切り替え
+## 📜 License
 
-*   コマンドラインモードで `:AutowToggle` を実行すると、自動保存機能のON/OFFが切り替わります。
-*   現在の状態はメッセージで表示されます。
+MIT. Feel free to use it, hack it, and make it yours!
+
+---
+*Built with ❤️ for the Neovim community.*
