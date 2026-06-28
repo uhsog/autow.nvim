@@ -38,7 +38,7 @@ function M.enable_autosave()
     end
 
     M.autocmd_group = vim.api.nvim_create_augroup("AutowAutosave", { clear = true })
-    vim.api.nvim_create_autocmd("InsertLeave", {
+    vim.api.nvim_create_autocmd("TextChanged", {
         group = M.autocmd_group,
         callback = function()
             if M.should_autosave() then
@@ -101,7 +101,7 @@ function M.should_autosave()
             return false -- Filename matches an exclusion pattern
         end
     end
-    
+
     -- Ensure the buffer has a name and is modifiable (not a scratch buffer, etc.)
     if filename == "" or vim.bo[bufnr].modifiable == false or vim.bo[bufnr].readonly == true then
         return false
