@@ -42,7 +42,7 @@ function M.enable_autosave()
         group = M.autocmd_group,
         callback = function()
             if M.should_autosave() then
-                vim.cmd('wa')
+                vim.cmd('update')
             end
         end,
     })
