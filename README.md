@@ -49,6 +49,7 @@ use {
 ```lua
 require('autow').setup({
   enabled = true,                        -- Enable on startup (default: true)
+  silent = true,                         -- Save silently without messages (default: true)
   filetypes = { "lua", "python" },      -- Only autosave these filetypes (default: {} for all)
   exclude_filenames = { "secrets.txt" }, -- Skip these files (default: {})
 })

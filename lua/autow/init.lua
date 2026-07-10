@@ -5,6 +5,7 @@ local M = {}
 -- Default configuration
 M.config = {
     enabled = true,
+    silent = true,
     filetypes = {}, -- Empty table means all filetypes are included by default
     exclude_filenames = {}, -- List of filenames (or patterns) to exclude
 }
@@ -12,6 +13,7 @@ M.config = {
 --- Sets up the autow.nvim plugin with user-defined configurations.
 --- @param opts table Configuration options.
 ---               - `enabled` (boolean): Whether the plugin is initially enabled. Default: true.
+---               - `silent` (boolean): Whether to save silently without printing messages. Default: true.
 ---               - `filetypes` (table): List of filetypes to enable autosave for. Empty table includes all. Default: {}.
 ---               - `exclude_filenames` (table): List of filenames (or glob patterns) to exclude from autosave. Default: {}.
 function M.setup(opts)
@@ -42,7 +44,11 @@ function M.enable_autosave()
         group = M.autocmd_group,
         callback = function()
             if M.should_autosave() then
-                vim.cmd('update')
+                if M.config.silent then
+                    vim.cmd('silent! update')
+                else
+                    vim.cmd('update')
+                end
             end
         end,
     })
